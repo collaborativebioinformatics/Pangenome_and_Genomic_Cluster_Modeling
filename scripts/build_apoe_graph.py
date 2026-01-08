@@ -3,7 +3,6 @@
 
 import subprocess
 import os
-import sys
 from pathlib import Path
 
 APOE_START = 45274138
@@ -74,7 +73,7 @@ def main():
     # Build graph from reference
     print("\nBuilding pangenome graph with PGGB...")
     graph_cmd = f"""docker compose -f ../docker/docker-compose.yml run pggb pggb \\
-        sys.exit(1)ta/apoe_ref.fa \\
+        -i /data/apoe_ref.fa \\
         -o /output/APOE_test \\
         -n 2 -t 4 -p 95 -s 5000"""
     

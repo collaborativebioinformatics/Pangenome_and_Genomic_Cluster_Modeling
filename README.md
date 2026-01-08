@@ -99,7 +99,7 @@ docker compose run vg autoindex --workflow giraffe \
   -p /data/my_graph/giraffe_index
 ```
 
-### Combining Graphs from Individual Cohorts
+### Aggregate Graphs from Individual Cohorts
 **WIP**
 `vg combine` vg toolkit looks promising.
 

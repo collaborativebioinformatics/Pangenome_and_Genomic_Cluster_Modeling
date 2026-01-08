@@ -20,7 +20,8 @@ For this project we are aiming to:
 # 1) Federated pangenome graph construction
 ## Flowchart
 
-<img width="1051" height="397" alt="image" src="https://github.com/user-attachments/assets/b734f28f-cbbd-4ed5-8eae-04a7e4059485" />
+<img width="1051" height="438" alt="image" src="https://github.com/user-attachments/assets/5b537588-eadb-4568-980f-9c9035245bc8" />
+
 
 
 ## a) Download Data from HPRC
@@ -107,7 +108,8 @@ docker compose run vg autoindex --workflow giraffe \
 `vg combine` from vg toolkit looks promising.
 
 # 2) Genomic background hashing for phenotype association of APOE locus
-<img width="980" height="490" alt="image" src="https://github.com/user-attachments/assets/9986a83d-8513-4914-8dbc-5a3087eb969c" />
+<img width="1051" height="438" alt="image" src="https://github.com/user-attachments/assets/4748426a-787f-4ace-92e8-397ec0f8746a" />
+
 
 We extracted this locus around the APOE gene which will be the region we use for localized pangenome graph mapping. Pangenome graph mapping may then provide a genomic background to contexualize the high risk APOE alleles. This genomic background may capture trans expression effects and we will aim to code this using genomic hashing to represent different anonymized haploblocks that could be used in a federated manner across studies. 
 

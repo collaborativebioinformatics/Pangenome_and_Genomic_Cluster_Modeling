@@ -98,6 +98,8 @@ docker compose run vg autoindex --workflow giraffe \
   -g /data/my_graph/*.smooth.final.gfa \
   -p /data/my_graph/giraffe_index
 ```
+### Graph Output
+<img width="942" height="490" alt="image" src="https://github.com/collaborativebioinformatics/Pangenome_and_Genomic_Cluster_Modeling/blob/main/results/graphs/HLA_test/DRB1-3123.fa.gz.4350df2.11fba48.a73cf76.smooth.final.og.lay.draw_multiqc.png" />
 
 ### d) Aggregate Graphs from Individual Cohorts
 **WIP**

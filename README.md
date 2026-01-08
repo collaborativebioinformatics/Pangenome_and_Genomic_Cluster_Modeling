@@ -56,7 +56,54 @@ python /home/rloughna/code/pangenome/make_hrcp_chr22_fasta.py \
 We extracted this locus around the APOE gene which will be the region we use for localized pangenome graph mapping.
 <img width="927" height="702" alt="image" src="https://github.com/user-attachments/assets/6198d356-a1c6-4c1a-a55f-3596352a1f72" />
 
+# 3) Docker Setup for Pangenome Graph Construction
 
+This directory contains Docker configurations for running PGGB and vg tools.
+
+## Prerequisites
+
+- Docker CE with Compose plugin (v5.0+)
+- Minimum 8GB RAM recommended
+
+## Available Services
+
+### PGGB (Pangenome Graph Builder)
+Builds pangenome graphs from multi-sample FASTA files.
+```bash
+docker compose run pggb pggb \
+  -i /data/<input.fa.gz> \
+  -o /output/<run_name> \
+  -n <num_haplotypes> \
+  -t 8 -p 90 -s 10000
+```
+
+### VG (Variation Graph Toolkit)
+Converts GFA graphs to Giraffe-compatible formats (GBZ, dist, min).
+```bash
+docker compose run vg autoindex --workflow giraffe \
+  -g /data/<graph.gfa> \
+  -p /data/<output_prefix>
+```
+
+## Quick Start
+```bash
+# 1. Start Docker daemon
+systemctl start docker
+
+# 2. Build containers
+docker compose build
+
+# 3. Run PGGB to build graph
+docker compose run pggb pggb \
+  -i /data/input.fa.gz \
+  -o /output/my_graph \
+  -n 12 -t 8 -p 90 -s 10000
+
+# 4. Convert to Giraffe format
+docker compose run vg autoindex --workflow giraffe \
+  -g /data/my_graph/*.smooth.final.gfa \
+  -p /data/my_graph/giraffe_index
+```
 
 # Results
 

@@ -2,11 +2,11 @@
 
 # Pangenome and Genomic Cluster Modeling
 # Problem 
-Pangenomes have the potential to more acurately catpure genomic diversity across human, however current state of the art graphs are only on 10's of individuals. Large biobanks (UK Biobank, AllOfUS) have long read sequencing data on thousands of people that could be used in the service constructing a more diverse pangenome graph, however methods do not currently exists for pangome graph construction that enables cross-talk between biobanks. 
+Pangenomes have the potential to more accurately capture genomic diversity across human, however current state of the art graphs are only on 10's of individuals. Large biobanks (UK Biobank, AllOfUS) have long read sequencing data on thousands of people that could be used in the service constructing a more diverse pangenome graph, however methods do not currently exists for pangome graph construction that enables cross-talk between biobanks. 
 
 # Intro and aim
 
-For this project we are aiming to complete two aims
+For this project we are aiming to:
 1) Perform federated pangenome graph construction (using HPRC data as a proof of principle)
 2) Perform federated genomic background hashing for phenotype association of APOE locus (using 1k genomes data)
    

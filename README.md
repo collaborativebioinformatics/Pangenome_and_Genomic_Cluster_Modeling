@@ -54,6 +54,13 @@ python /home/rloughna/code/pangenome/make_hrcp_chr22_fasta.py \
 <img width="980" height="490" alt="image" src="https://github.com/user-attachments/assets/9986a83d-8513-4914-8dbc-5a3087eb969c" />
 
 We extracted this locus around the APOE gene which will be the region we use for localized pangenome graph mapping.
+
+### Download GWAS Data
+downloaded from [GWAS Catalog](https://www.ebi.ac.uk/gwas/studies/GCST013197)
+```
+wget https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST013001-GCST014000/GCST013197/GCST013197.tsv.gz
+gunzip GCST013197.tsv.gz
+```
 <img width="927" height="702" alt="image" src="https://github.com/user-attachments/assets/6198d356-a1c6-4c1a-a55f-3596352a1f72" />
 
 # 3) Docker Setup for Pangenome Graph Construction

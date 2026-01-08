@@ -13,6 +13,11 @@ if [ -z "$INPUT_GRAPH" ]; then
     exit 1
 fi
 
+if [ ! -f "$INPUT_GRAPH" ]; then
+    echo "Error: Input graph file not found: $INPUT_GRAPH"
+    exit 1
+fi
+
 mkdir -p "$OUTPUT_DIR"
 
 echo "Extracting APOE region: $APOE_REGION"
@@ -20,7 +25,7 @@ echo "From graph: $INPUT_GRAPH"
 
 # Extract APOE region using odgi
 docker compose -f ../docker/docker-compose.yml run vg bash -c "odgi extract \
-    -i /data/$(basename $INPUT_GRAPH) \
+    -i /data/$(basename "$INPUT_GRAPH") \
     -r $APOE_REGION \
     -o /output/APOE_test/apoe_extracted.og -P"
 

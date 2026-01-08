@@ -3,6 +3,7 @@
 
 import subprocess
 import os
+import sys
 from pathlib import Path
 
 APOE_START = 45274138
@@ -12,25 +13,33 @@ OUTPUT_DIR = "../data"
 GRAPH_OUTPUT = "../results/graphs/APOE_test"
 
 # 1000 Genomes samples to use (diverse ancestry)
+# Selected to represent broad population diversity:
+# - HG00096, HG00097: GBR (British, European ancestry)
+# - NA19625, NA19648: ASW (African American, admixed African/European)
+# - HG01879: ACB (African Caribbean, African ancestry)
+# - NA12878: CEU (Utah European, commonly used reference sample)
 SAMPLES = [
-    "HG00096",  # GBR (British)
-    "HG00097",  # GBR
-    "NA19625",  # ASW (African American)
-    "NA19648",  # ASW
-    "HG01879",  # ACB (African Caribbean)
-    "NA12878",  # CEU (Utah European)
+    "HG00096",
+    "HG00097",
+    "NA19625",
+    "NA19648",
+    "HG01879",
+    "NA12878",
 ]
 
 def run_cmd(cmd, desc):
+    """Execute shell command and check for errors"""
     print(f"\n{'='*60}")
     print(desc)
     print(f"{'='*60}")
     print(f"$ {cmd}")
     result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
     if result.returncode != 0:
-        print(f"ERROR: {result.stderr}")
+        print(f"ERROR: Command failed with exit code {result.returncode}")
+        print(f"stderr: {result.stderr}")
         return False
-    print(result.stdout)
+    if result.stdout:
+        print(result.stdout)
     return True
 
 def main():
@@ -65,7 +74,7 @@ def main():
     # Build graph from reference
     print("\nBuilding pangenome graph with PGGB...")
     graph_cmd = f"""docker compose -f ../docker/docker-compose.yml run pggb pggb \\
-        -i /data/apoe_ref.fa \\
+        sys.exit(1)ta/apoe_ref.fa \\
         -o /output/APOE_test \\
         -n 2 -t 4 -p 95 -s 5000"""
     

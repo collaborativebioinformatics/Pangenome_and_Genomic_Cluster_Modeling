@@ -6,16 +6,41 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import os
+import argparse
 
-GWAS_FILE = '../gwas/data/GCST013197.tsv'
-OUTPUT_DIR = '../gwas/data'
-LOCUS_PADDING = 50000
-P_VALUE_THRESHOLD = 1e-100
+DEFAULT_LOCUS_PADDING = 50000
+DEFAULT_P_VALUE_THRESHOLD = 1e-100
 
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+def main():
+    parser = argparse.ArgumentParser(description='Extract APOE locus from GWAS data')
+    parser.add_argument('--gwas', default='../gwas/data/GCST013197.tsv',
+                       help='Path to GWAS data file')
+    parser.add_argument('--output', default='../gwas/data',
+                       help='Output directory for BED and plots')
+    parser.add_argument('--padding', type=int, default=DEFAULT_LOCUS_PADDING,
+                       help=f'Base pairs padding around SNPs (default: {DEFAULT_LOCUS_PADDING:,})')
+    parser.add_argument('--pval', type=float, default=DEFAULT_P_VALUE_THRESHOLD,
+                       help=f'P-value threshold (default: {DEFAULT_P_VALUE_THRESHOLD})')
+    args = parser.parse_args()
+    
+    GWAS_FILE = args.gwas
+    OUTPUT_DIR = args.output
+    LOCUS_PADDING = args.padding
+    P_VALUE_THRESHOLD = args.pval
+    
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    
+    print("Loading GWAS data...")
+    try:
+        gwas_df = pd.read_csv(GWAS_FILE, delimiter='\t')
+    except FileNotFoundError:
+        print(f"Error: GWAS file not found: {GWAS_FILE}")
+        print("Please download the file first or check the path.")
+        exit(1)
+    except Exception as e:
+        print(f"Error reading GWAS file: {e}")
+        exit(1)
 
-print("Loading GWAS data...")
-gwas_df = pd.read_csv(GWAS_FILE, delimiter='\t')
 print(f"Total SNPs: {len(gwas_df)}")
 
 chr19_df = gwas_df[gwas_df['chromosome'] == 19].copy()
@@ -23,23 +48,12 @@ sig_snps = chr19_df[chr19_df['p_value'] < P_VALUE_THRESHOLD].sort_values(by='p_v
 print(f"Significant SNPs (chr19, p < {P_VALUE_THRESHOLD}): {len(sig_snps)}")
 
 if len(sig_snps) > 0:
-    # Get interval around significant SNPs
-    bp_min = sig_snps['base_pair_location'].min() - LOCUS_PADDING
-    bp_max = sig_snps['base_pair_location'].max() + LOCUS_PADDING
-    
-    print(f"\nAPOE Locus Interval (chr19):")
-    print(f"  Start: {bp_min:,} bp")
-    print(f"  End: {bp_max:,} bp")
-    print(f"  Width: {bp_max - bp_min:,} bp ({(bp_max - bp_min) / 1e6:.2f} Mb)")
-    
-    # Save coordinates in BED format for odgi extract
-    bed_file = os.path.join(OUTPUT_DIR, 'apoe_locus.bed')
     bp_min = sig_snps['base_pair_location'].min() - LOCUS_PADDING
     bp_max = sig_snps['base_pair_location'].max() + LOCUS_PADDING
     
     print(f"\nAPOE Locus: chr19:{bp_min:,}-{bp_max:,} ({(bp_max - bp_min) / 1e6:.2f} Mb)")
     
-    # Save BED file for graph extraction
+    # Save BED file for odgi extract (zero-based, half-open intervals)
     bed_file = os.path.join(OUTPUT_DIR, 'apoe_locus.bed')
     with open(bed_file, 'w') as f:
         f.write(f"chr19\t{int(bp_min)}\t{int(bp_max)}\tAPOE_locus\n")
@@ -72,3 +86,6 @@ if len(sig_snps) > 0:
     
     print(f"Saved: {bed_file}")
     print("\nExtraction complete!")
+
+if __name__ == "__main__":
+    main()

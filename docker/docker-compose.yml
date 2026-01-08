@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  pggb:
+    image: ghcr.io/pangenome/pggb:latest
+    volumes:
+      - ../data:/data:ro
+      - ../results/graphs:/output
+    working_dir: /data
+
+  vg:
+    build:
+      context: .
+      dockerfile: Dockerfile.vg
+    volumes:
+      - ../results/graphs:/data
+    working_dir: /data

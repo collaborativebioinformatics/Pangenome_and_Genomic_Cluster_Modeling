@@ -2,7 +2,7 @@
 
 # Pangenome and Genomic Cluster Modeling
 # Problem 
-Pangenomes have the potential to more accurately capture genomic diversity across human, however current state of the art graphs are only on 10's of individuals. Large biobanks (UK Biobank, AllOfUS) have long read sequencing data on thousands of people that could be used in the service constructing a more diverse pangenome graph, however methods do not currently exists for pangome graph construction that enables cross-talk between biobanks. 
+Pangenomes have the potential to more accurately capture genomic diversity across humans, however current state-of-the-art graphs are only on tens of individuals. Large biobanks (UK Biobank, AllOfUS) have long read sequencing data on thousands of people that could be used in the service constructing a more diverse pangenome graph, however methods do not currently exists for pangenome graph construction that enables cross-talk between biobanks. 
 
 # Intro and aim
 
@@ -22,18 +22,18 @@ For this project we are aiming to:
 
 <img width="942" height="490" alt="image" src="https://github.com/user-attachments/assets/1e736b17-d779-4cd9-aa68-78d06b2d1740" />
 
-## a) Dowload Data from HPRC
+## a) Download Data from HPRC
 
-Dowload data from HPRC for generating graphs from:
+Download data from HPRC for generating graphs from:
 ```
 download_path=/path/to/download/destination/
 python ./HPRC_download_prep/download_hprc.py \
 ./HPRC_download_prep/assemblies.tsv \
 $download_path
 ```
-### Extract Chromsome 19 and 22 from HPRC samples
+### Extract Chromosome 19 and 22 from HPRC samples
 
-As pangenome graph construction is very comptuationally intensive we will be running the process on chromosome19 and chromsome22 as a more tractable dataset.
+As pangenome graph construction is very computationally intensive we will be running the process on chromosome19 and chromsome22 as a more tractable dataset.
 
 ### Install Entrez Direct using conda
 The contig names in the fasta files for HPRC are NCBI identifiers and need to be queried using edirect tools to convert these to convetional chromosme numbers (e.g. CM102454.1 -> chr22). This can be installed with conda using:
@@ -41,7 +41,7 @@ The contig names in the fasta files for HPRC are NCBI identifiers and need to be
 conda install bioconda::entrez-direct
 ```
 
-From this then the following python script can be used to extract chr19 and chr22 from the assembly FASTA files for HPRC:
+From this, the following python script can be used to extract chr19 and chr22 from the assembly FASTA files for HPRC:
 ```
 # This should be the path to the assemblies downloaded above
 download_path='/path/to/download/destination/'
@@ -108,7 +108,7 @@ docker compose run vg autoindex --workflow giraffe \
 # 2) Genomic background hashing for phenotype association of APOE locus
 <img width="980" height="490" alt="image" src="https://github.com/user-attachments/assets/9986a83d-8513-4914-8dbc-5a3087eb969c" />
 
-We extracted this locus around the APOE gene which will be the region we use for localized pangenome graph mapping. Pangome graph mapping may then provide a genomic background to contexualize the high risk APOE alleles. This genomic background may capture trans expression effects and we will aim to code this using gemomic hashing to represent different anonymized haploblocks that could be used in a federated matter across studies. 
+We extracted this locus around the APOE gene which will be the region we use for localized pangenome graph mapping. Pangenome graph mapping may then provide a genomic background to contexualize the high risk APOE alleles. This genomic background may capture trans expression effects and we will aim to code this using genomic hashing to represent different anonymized haploblocks that could be used in a federated manner across studies. 
 
 ### Focus on APOE Locus
 downloaded from [GWAS Catalog](https://www.ebi.ac.uk/gwas/studies/GCST013197)
@@ -118,7 +118,7 @@ gunzip GCST013197.tsv.gz
 ```
 <img width="927" height="702" alt="image" src="https://github.com/user-attachments/assets/6198d356-a1c6-4c1a-a55f-3596352a1f72" />
 
-### Extract Locus from Pre-constructed Pangome Graph
+### Extract Locus from Pre-constructed Pangenome Graph
 ** WIP **: `odgi extract` will be used, still need to figure out details.
 # Results
 

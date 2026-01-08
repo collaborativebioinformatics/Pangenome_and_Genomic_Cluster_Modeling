@@ -1,0 +1,19 @@
+# Large genomic files
+*.fa
+*.fasta
+*.fa.gz
+*.fq
+*.fastq
+*.bam
+*.vcf
+*.vcf.gz
+*.gfa
+*.og
+*.paf
+*.maf
+!data/test/**
+# Temp
+*.tmp
+.DS_Store
+__pycache__/
+*.pem

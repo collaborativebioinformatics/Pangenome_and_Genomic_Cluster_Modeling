@@ -120,7 +120,7 @@ gunzip GCST013197.tsv.gz
 <img width="927" height="702" alt="image" src="https://github.com/user-attachments/assets/6198d356-a1c6-4c1a-a55f-3596352a1f72" />
 
 ### Extract Locus from Pre-constructed Pangenome Graph
-** WIP **: `odgi extract` will be used, still need to figure out details.
+**WIP**: `odgi extract` will be used, still need to figure out details.
 # Results
 
 # Conclusions

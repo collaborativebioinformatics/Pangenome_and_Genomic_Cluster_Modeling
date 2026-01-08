@@ -53,6 +53,10 @@ python /home/rloughna/code/pangenome/make_hrcp_chr22_fasta.py \
 # 2) Genomic background hashing for phenotype association of APOE locus
 <img width="980" height="490" alt="image" src="https://github.com/user-attachments/assets/9986a83d-8513-4914-8dbc-5a3087eb969c" />
 
+We extracted this locus around the APOE gene which will be the region we use for localized pangenome graph mapping.
+<img width="927" height="702" alt="image" src="https://github.com/user-attachments/assets/6198d356-a1c6-4c1a-a55f-3596352a1f72" />
+
+
 
 # Results
 

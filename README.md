@@ -52,10 +52,10 @@ python ./HPRC_download_prep/make_hrcp_chr22_fasta.py \
 --bgzip
 ```
 
-## Create Partitions of Data to Simulate Biobank Cohorts
+## b) Create Partitions of Data to Simulate Biobank Cohorts
 **WIP**
 
-## b) Graph Construction 
+## c) Graph Construction 
 ### Prerequisites
 
 - Docker CE with Compose plugin (v5.0+)
@@ -99,14 +99,14 @@ docker compose run vg autoindex --workflow giraffe \
   -p /data/my_graph/giraffe_index
 ```
 
-### Aggregate Graphs from Individual Cohorts
+### d) Aggregate Graphs from Individual Cohorts
 **WIP**
 `vg combine` from vg toolkit looks promising.
 
 # 2) Genomic background hashing for phenotype association of APOE locus
 <img width="980" height="490" alt="image" src="https://github.com/user-attachments/assets/9986a83d-8513-4914-8dbc-5a3087eb969c" />
 
-We extracted this locus around the APOE gene which will be the region we use for localized pangenome graph mapping.
+We extracted this locus around the APOE gene which will be the region we use for localized pangenome graph mapping. Pangome graph mapping may then provide a genomic background to contexualize the high risk APOE alleles. This genomic background may capture trans expression effects and we will aim to code this using gemomic hashing to represent different anonymized haploblocks that could be used in a federated matter across studies. 
 
 ### Download GWAS Data
 downloaded from [GWAS Catalog](https://www.ebi.ac.uk/gwas/studies/GCST013197)

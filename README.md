@@ -101,7 +101,7 @@ docker compose run vg autoindex --workflow giraffe \
 
 ### Aggregate Graphs from Individual Cohorts
 **WIP**
-`vg combine` vg toolkit looks promising.
+`vg combine` from vg toolkit looks promising.
 
 # 2) Genomic background hashing for phenotype association of APOE locus
 <img width="980" height="490" alt="image" src="https://github.com/user-attachments/assets/9986a83d-8513-4914-8dbc-5a3087eb969c" />
@@ -115,13 +115,6 @@ wget https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST013001-GCST
 gunzip GCST013197.tsv.gz
 ```
 <img width="927" height="702" alt="image" src="https://github.com/user-attachments/assets/6198d356-a1c6-4c1a-a55f-3596352a1f72" />
-
-# 3) Docker Setup for Pangenome Graph Construction
-
-This directory contains Docker configurations for running PGGB and vg tools.
-
-
-
 # Results
 
 # Conclusions

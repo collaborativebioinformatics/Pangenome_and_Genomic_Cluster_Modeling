@@ -20,7 +20,8 @@ For this project we are aiming to:
 # 1) Federated pangenome graph construction
 ## Flowchart
 
-<img width="942" height="490" alt="image" src="https://github.com/user-attachments/assets/1e736b17-d779-4cd9-aa68-78d06b2d1740" />
+<img width="1051" height="397" alt="image" src="https://github.com/user-attachments/assets/b734f28f-cbbd-4ed5-8eae-04a7e4059485" />
+
 
 ## a) Download Data from HPRC
 

@@ -108,13 +108,16 @@ docker compose run vg autoindex --workflow giraffe \
 
 We extracted this locus around the APOE gene which will be the region we use for localized pangenome graph mapping. Pangome graph mapping may then provide a genomic background to contexualize the high risk APOE alleles. This genomic background may capture trans expression effects and we will aim to code this using gemomic hashing to represent different anonymized haploblocks that could be used in a federated matter across studies. 
 
-### Download GWAS Data
+### Focus on APOE Locus
 downloaded from [GWAS Catalog](https://www.ebi.ac.uk/gwas/studies/GCST013197)
 ```
 wget https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST013001-GCST014000/GCST013197/GCST013197.tsv.gz
 gunzip GCST013197.tsv.gz
 ```
 <img width="927" height="702" alt="image" src="https://github.com/user-attachments/assets/6198d356-a1c6-4c1a-a55f-3596352a1f72" />
+
+### Extract Locus from Pre-constructed Pangome Graph
+** WIP **: `odgi extract` will be used, still need to figure out details.
 # Results
 
 # Conclusions

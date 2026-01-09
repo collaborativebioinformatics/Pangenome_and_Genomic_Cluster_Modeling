@@ -3,9 +3,8 @@
 OmniGenome: Genomic Dot Plot Generator
 --------------------------------------
 Optimized for APOE haploblock clusters (~50kb).
-Uses k-mer hashing for O(N) performance.
+Uses k-mer hashing 
 
-License: MIT
 """
 
 import sys
@@ -48,7 +47,7 @@ def find_kmer_matches(seq1, seq2, k):
 def main():
     args = get_args()
 
-    # Load FASTA (Handles .gz or .fa)
+    # Load FASTA (Handles both .gz or .fa)
     opener = gzip.open if args.fasta.endswith(".gz") else open
     try:
         with opener(args.fasta, "rt") as f:
@@ -59,7 +58,7 @@ def main():
     if len(records) < 2:
         sys.exit("Error: Need at least 2 sequences to compare.")
 
-    # Select the cluster representatives (Step-1 task)
+    # Select the cluster 
     rec1, rec2 = records[0], records[1]
     s1_seq, s2_seq = str(rec1.seq).upper(), str(rec2.seq).upper()
 
@@ -87,3 +86,4 @@ def main():
 if __name__ == "__main__":
 
     main()
+

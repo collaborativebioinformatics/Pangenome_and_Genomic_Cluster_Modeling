@@ -265,7 +265,7 @@ This enables:
 - Adam Kehl  
 - Jedrzej Kubica  
 - Kumar Koushik Telaprolu  
-- **Jeff Winchell**  
+- Jeff Winchell  
 - Sanjnaa Sridhar  
 
 ---

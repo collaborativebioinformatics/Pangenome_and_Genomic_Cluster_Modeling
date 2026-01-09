@@ -1,6 +1,8 @@
 > CMU x NVIDIA Hackathon, January 7-9, 2026
 
 # Pangenome and Genomic Cluster Modeling
+<img width="256" height="256" alt="omnigenome_logo" src="https://github.com/user-attachments/assets/5d2e5108-603f-4758-82c5-35e6172110d1" />
+
 # Problem 
 Pangenomes have the potential to more accurately capture genomic diversity across humans, however current state-of-the-art graphs are only on tens of individuals. Large biobanks (UK Biobank, AllOfUS) have long read sequencing data on thousands of people that could be used in the service constructing a more diverse pangenome graph, however methods do not currently exists for pangenome graph construction that enables cross-talk between biobanks. 
 

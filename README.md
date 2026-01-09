@@ -13,6 +13,7 @@
 
 ---
 
+## [Slide Deck](https://docs.google.com/presentation/d/1TgyhSrdlTlUGgG48wNvB7Bk-bUEBJalhy6bKcq5-2uI/edit?usp=sharing)
 ## 🧠 Problem & Motivation
 
 Pangenomes offer a powerful alternative to single-reference genomes by representing genetic variation across many individuals. However, **current pangenome graphs typically include only tens of samples**, while modern biobanks (UK Biobank, All of Us, HPRC) now contain **thousands of long-read genomes** spanning diverse populations.

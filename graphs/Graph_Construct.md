@@ -347,9 +347,7 @@ cat /mnt/shared_vol/graphs/pipeline_*.log
 
 **CMU x NVIDIA Hackathon 2026**
 
-- Kumar Koushik Telaprolu (Carnegie Mellon University; Indiana University Bloomington)
-- Rob (Team Lead)
-- [Other team members]
+
 
 ---
 

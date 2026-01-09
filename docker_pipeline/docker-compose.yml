@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  federated-pipeline:
+    build: .
+    container_name: federated_pangenome_pipeline
+    volumes:
+      # Mount shared volume for data
+      - /mnt/shared_vol:/mnt/shared_vol
+      # Mount Docker socket to run Docker commands inside container
+      - /var/run/docker.sock:/var/run/docker.sock
+    working_dir: /pipeline
+    restart: "no"
+    # Run in detached mode
+    tty: true
+    stdin_open: true

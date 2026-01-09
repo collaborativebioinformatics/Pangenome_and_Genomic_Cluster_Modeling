@@ -1,0 +1,106 @@
+================================================================================
+              PANGENOME GRAPH COMPARISON REPORT
+              Generated: 2026-01-09 18:47:20
+================================================================================
+
+--------------------------------------------------------------------------------
+GRAPH 1: chr19_chunk1_sub10
+--------------------------------------------------------------------------------
+  branch_nodes                  :              341,937
+  branch_ratio                  :               0.3589
+  edge_node_ratio               :               1.4451
+  isolated_nodes                :                    0
+  linear_nodes                  :              610,738
+  max_degree                    :                4,140
+  max_node_len                  :              513,531
+  mean_degree                   :               2.8902
+  mean_node_len                 :              94.5953
+  median_node_len               :               2.0000
+  min_node_len                  :                    1
+  n50                           :                  913
+  n90                           :                   90
+  num_edges                     :            1,376,746
+  num_nodes                     :              952,688
+  num_paths                     :                   10
+  num_samples                   :                    5
+  std_node_len                  :           1,806.5933
+  total_bp                      :           90,119,779
+
+--------------------------------------------------------------------------------
+GRAPH 2: chr19.hprc-v1.0-pggb
+--------------------------------------------------------------------------------
+  branch_nodes                  :            1,217,636
+  branch_ratio                  :               0.4030
+  edge_node_ratio               :               1.3951
+  isolated_nodes                :                   16
+  linear_nodes                  :            1,802,783
+  max_degree                    :                   45
+  max_node_len                  :            6,492,599
+  mean_degree                   :               2.7901
+  mean_node_len                 :              96.2443
+  median_node_len               :               1.0000
+  min_node_len                  :                    1
+  n50                           :              449,784
+  n90                           :                  129
+  num_edges                     :            4,214,675
+  num_nodes                     :            3,021,157
+  num_paths                     :                1,072
+  num_samples                   :                   46
+  std_node_len                  :          12,389.7416
+  total_bp                      :          290,769,234
+
+================================================================================
+COMPARISON TABLE
+================================================================================
+Metric                    | chr19_chunk1_sub10 | chr19.hprc-v1.0-pg |      Ratio
+--------------------------------------------------------------------------------
+branch_nodes              |            341,937 |          1,217,636 |     0.281x
+branch_ratio              |             0.3589 |             0.4030 |     0.891x
+edge_node_ratio           |             1.4451 |             1.3951 |     1.036x
+isolated_nodes            |                  0 |                 16 |     0.000x
+linear_nodes              |            610,738 |          1,802,783 |     0.339x
+max_degree                |              4,140 |                 45 |    92.000x
+max_node_len              |            513,531 |          6,492,599 |     0.079x
+mean_degree               |             2.8902 |             2.7901 |     1.036x
+mean_node_len             |            94.5953 |            96.2443 |     0.983x
+median_node_len           |             2.0000 |             1.0000 |     2.000x
+min_node_len              |                  1 |                  1 |     1.000x
+n50                       |                913 |            449,784 |     0.002x
+n90                       |                 90 |                129 |     0.698x
+num_edges                 |          1,376,746 |          4,214,675 |     0.327x
+num_nodes                 |            952,688 |          3,021,157 |     0.315x
+num_paths                 |                 10 |              1,072 |     0.009x
+num_samples               |                  5 |                 46 |     0.109x
+std_node_len              |         1,806.5933 |        12,389.7416 |     0.146x
+total_bp                  |         90,119,779 |        290,769,234 |     0.310x
+
+================================================================================
+KEY INSIGHTS
+================================================================================
+
+SCALE COMPARISON:
+   - chr19.hprc-v1.0-pggb has 3.2x MORE nodes (3,021,157 vs 952,688)
+   - chr19.hprc-v1.0-pggb has 3.1x MORE edges (4,214,675 vs 1,376,746)
+
+COMPLEXITY ANALYSIS:
+   - chr19_chunk1_sub10 branch ratio: 0.3589 (341,937 branching nodes)
+   - chr19.hprc-v1.0-pggb branch ratio: 0.4030 (1,217,636 branching nodes)
+   - chr19.hprc-v1.0-pggb shows HIGHER complexity
+
+CONTIGUITY (N50/N90):
+   - chr19_chunk1_sub10: N50=913 bp, N90=90 bp
+   - chr19.hprc-v1.0-pggb: N50=449,784 bp, N90=129 bp
+
+SAMPLE COVERAGE:
+   - chr19_chunk1_sub10: 5 unique samples, 10 paths
+   - chr19.hprc-v1.0-pggb: 46 unique samples, 1072 paths
+
+SEQUENCE STATISTICS:
+   - chr19_chunk1_sub10: Total=90.12Mb, Mean node=95bp
+   - chr19.hprc-v1.0-pggb: Total=290.77Mb, Mean node=96bp
+
+CONNECTIVITY:
+   - chr19_chunk1_sub10: Mean degree=2.89, Edge/node ratio=1.45
+   - chr19.hprc-v1.0-pggb: Mean degree=2.79, Edge/node ratio=1.40
+
+================================================================================

@@ -1,0 +1,59 @@
+================================================================================
+              PANGENOME GRAPH COMPARISON REPORT
+              Generated: 2026-01-09 19:28:10
+================================================================================
+
+--------------------------------------------------------------------------------
+GRAPH 1: Graph Iteration 1
+--------------------------------------------------------------------------------
+  branch_nodes                  :              341,937
+  branch_ratio                  :               0.3589
+  edge_node_ratio               :               1.4451
+  isolated_nodes                :                    0
+  linear_nodes                  :              610,738
+  max_degree                    :                4,140
+  max_node_len                  :              513,531
+  mean_degree                   :               2.8902
+  mean_node_len                 :              94.5953
+  median_node_len               :               2.0000
+  min_node_len                  :                    1
+  n50                           :                  913
+  n90                           :                   90
+  num_edges                     :            1,376,746
+  num_nodes                     :              952,688
+  num_paths                     :                   10
+  num_samples                   :                    5
+  std_node_len                  :           1,806.5933
+  total_bp                      :           90,119,779
+
+--------------------------------------------------------------------------------
+GRAPH 2: Fully Converged Graph (HPRC)
+--------------------------------------------------------------------------------
+  branch_nodes                  :            1,217,636
+  branch_ratio                  :               0.4030
+  edge_node_ratio               :               1.3951
+  isolated_nodes                :                   16
+  linear_nodes                  :            1,802,783
+  max_degree                    :                   45
+  max_node_len                  :            6,492,599
+  mean_degree                   :               2.7901
+  mean_node_len                 :              96.2443
+  median_node_len               :               1.0000
+  min_node_len                  :                    1
+  n50                           :              449,784
+  n90                           :                  129
+  num_edges                     :            4,214,675
+  num_nodes                     :            3,021,157
+  num_paths                     :                1,072
+  num_samples                   :                   46
+  std_node_len                  :          12,389.7416
+  total_bp                      :          290,769,234
+
+================================================================================
+KEY INSIGHTS
+================================================================================
+
+SCALE: Fully Converged Graph (HPRC) has 3.2x more nodes
+COMPLEXITY: Fully Converged Graph (HPRC) is more complex
+N50: Graph Iteration 1=913 vs Fully Converged Graph (HPRC)=449,784
+================================================================================

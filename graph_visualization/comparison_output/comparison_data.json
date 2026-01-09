@@ -1,0 +1,53 @@
+{
+  "graph1": {
+    "name": "Graph Iteration 1",
+    "stats": {
+      "name": "Graph Iteration 1",
+      "num_nodes": 952688.0,
+      "num_edges": 1376746.0,
+      "num_paths": 10.0,
+      "num_samples": 5.0,
+      "total_bp": 90119779.0,
+      "mean_node_len": 94.59527043481182,
+      "median_node_len": 2.0,
+      "min_node_len": 1.0,
+      "max_node_len": 513531.0,
+      "std_node_len": 1806.5932971481386,
+      "n50": 913.0,
+      "n90": 90.0,
+      "mean_degree": 2.8902347883042507,
+      "max_degree": 4140.0,
+      "isolated_nodes": 0.0,
+      "linear_nodes": 610738.0,
+      "branch_nodes": 341937.0,
+      "branch_ratio": 0.3589181347933426,
+      "edge_node_ratio": 1.4451173941521254
+    }
+  },
+  "graph2": {
+    "name": "Fully Converged Graph (HPRC)",
+    "stats": {
+      "name": "Fully Converged Graph (HPRC)",
+      "num_nodes": 3021157.0,
+      "num_edges": 4214675.0,
+      "num_paths": 1072.0,
+      "num_samples": 46.0,
+      "total_bp": 290769234.0,
+      "mean_node_len": 96.24433089707023,
+      "median_node_len": 1.0,
+      "min_node_len": 1.0,
+      "max_node_len": 6492599.0,
+      "std_node_len": 12389.741577898005,
+      "n50": 449784.0,
+      "n90": 129.0,
+      "mean_degree": 2.7901065717538014,
+      "max_degree": 45.0,
+      "isolated_nodes": 16.0,
+      "linear_nodes": 1802783.0,
+      "branch_nodes": 1217636.0,
+      "branch_ratio": 0.403036320191238,
+      "edge_node_ratio": 1.3950532858769007
+    }
+  },
+  "generated": "2026-01-09T19:28:10.656655"
+}

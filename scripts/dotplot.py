@@ -26,7 +26,7 @@ def get_args():
 def find_kmer_matches(seq1, seq2, k):
     """
     Builds a hash map of seq1 and scans seq2 for matches.
-    This prevents the 'blue square' issue by requiring k-consecutive matches.
+    
     """
     # 1. Index the first sequence
     lookup = defaultdict(list)
@@ -85,4 +85,5 @@ def main():
     print(f"Plot saved to {args.output}")
 
 if __name__ == "__main__":
+
     main()

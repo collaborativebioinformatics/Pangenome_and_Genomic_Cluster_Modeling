@@ -37,13 +37,14 @@ This repository follows the workflow from [Haploblock Clusters ElixirBH25](https
 | ε2/ε2 | 14 |
 | Unknown | 1 |
 
-## TODO
-
-- Generate **genomic hashes** for AD-associated SNPs in APOE (from the [GWAS Catalog](https://www.ebi.ac.uk/gwas/)).  
-- Check if **clusters correspond to APOE subtypes**.  
+We generated **genomic hashes** for AD-associated SNPs in APOE (from the [GWAS Catalog](https://www.ebi.ac.uk/gwas/)).
+- Check if **clusters correspond to APOE subtypes**.
   - If yes, great.  
-  - If not, verify whether hashes correspond to genomic backgrounds explaining **differential outcomes in AD**.  
-- Generate a **heatmap**: cluster ID vs APOE alleles (1/2/3/4).
+  - If not, verify whether hashes correspond to genomic backgrounds explaining **differential outcomes in AD**.
+
+We generated a **heatmap**: cluster ID vs APOE alleles (1/2/3/4). A part of the heatmap:
+
+![apoe_clusters_representative.png](apoe_clusters_representative.png)
 
 ## Extending to Biobank Data
 

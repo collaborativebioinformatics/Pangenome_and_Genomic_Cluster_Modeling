@@ -1,35 +1,57 @@
 > CMU x NVIDIA Hackathon, January 7-9, 2026
-
-# Pangenome and Genomic Cluster Modeling
 <img width="256" height="256" alt="omnigenome_logo" src="https://github.com/user-attachments/assets/5d2e5108-603f-4758-82c5-35e6172110d1" />
 
-# Problem 
+# OmniGenome: Pangenome and Genomic Cluster Modeling
+
+## Problem 
 Pangenomes have the potential to more accurately capture genomic diversity across humans, however current state-of-the-art graphs are only on tens of individuals. Large biobanks (UK Biobank, AllOfUS) have long read sequencing data on thousands of people that could be used in the service constructing a more diverse pangenome graph, however methods do not currently exists for pangenome graph construction that enables cross-talk between biobanks. 
 
-# Intro and aim
+## Intro and aim
 
 For this project we are aiming to:
 1) Perform federated pangenome graph construction (using HPRC data as a proof of principle)
 2) Perform federated genomic background hashing for phenotype association of APOE locus (using 1k genomes data)
    
-# Contributors
--
+### Contributors
+- Rob Loughnan
+- Adam Kehl
+- Jedrzej Kubica
+- Kumar Koushik
+- Jeff Winchell
+- Sanjnaa Sridhar
 
-# Quick Start
+## Quick Start
 #### Step 1: Find locus of interest by filtering for low p-values from a GWAS
 Find locus using the [gwas jupyter notebook](https://github.com/collaborativebioinformatics/omnigenome/blob/main/gwas/extract_rois.ipynb) (download summary statistics from [GWAS Catalog](https://www.ebi.ac.uk/gwas/)
+#### Step 2:
+```bash
+# 1. Start Docker daemon
+systemctl start docker
 
-# How to use this repo
-# Methods
+# 2. Build containers
+docker compose build
 
-# 1) Federated pangenome graph construction
-## Flowchart
+# 3. Run PGGB to build graph
+docker compose run pggb pggb \
+  -i /data/input.fa.gz \
+  -o /output/my_graph \
+  -n 12 -t 8 -p 90 -s 10000
+
+# 4. Convert to Giraffe format
+docker compose run vg autoindex --workflow giraffe \
+  -g /data/my_graph/*.smooth.final.gfa \
+  -p /data/my_graph/giraffe_index
+```
+## Methods
+
+## 1) Federated pangenome graph construction
+### Flowchart
 
 <img width="1051" height="438" alt="image" src="https://github.com/user-attachments/assets/5b537588-eadb-4568-980f-9c9035245bc8" />
 
 
 
-## a) Download Data from HPRC
+### a) Download Data from HPRC
 
 Download data from HPRC for generating graphs from:
 ```
@@ -59,10 +81,10 @@ python ./HPRC_download_prep/make_hrcp_chr22_fasta.py \
 --bgzip
 ```
 
-## b) Create Partitions of Data to Simulate Biobank Cohorts
+### b) Create Partitions of Data to Simulate Biobank Cohorts
 **WIP**
 
-## c) Graph Construction 
+### c) Graph Construction 
 ### Prerequisites
 
 - Docker CE with Compose plugin (v5.0+)
@@ -86,25 +108,7 @@ docker compose run vg autoindex --workflow giraffe \
   -p /data/<output_prefix>
 ```
 
-### Quick Start
-```bash
-# 1. Start Docker daemon
-systemctl start docker
 
-# 2. Build containers
-docker compose build
-
-# 3. Run PGGB to build graph
-docker compose run pggb pggb \
-  -i /data/input.fa.gz \
-  -o /output/my_graph \
-  -n 12 -t 8 -p 90 -s 10000
-
-# 4. Convert to Giraffe format
-docker compose run vg autoindex --workflow giraffe \
-  -g /data/my_graph/*.smooth.final.gfa \
-  -p /data/my_graph/giraffe_index
-```
 ### Graph Output
 <img width="942" height="490" alt="image" src="https://github.com/collaborativebioinformatics/Pangenome_and_Genomic_Cluster_Modeling/blob/main/results/graphs/HLA_test/DRB1-3123.fa.gz.4350df2.11fba48.a73cf76.smooth.final.og.lay.draw_multiqc.png" />
 

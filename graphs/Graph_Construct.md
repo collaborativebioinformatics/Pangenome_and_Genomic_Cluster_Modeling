@@ -122,6 +122,7 @@ STEP 3: FEEDBACK LOOP (minigraph)
 | **vg convert** | Convert between GFA and VG formats | Step 2 |
 | **minigraph** | Incremental graph construction for feedback | Step 3 |
 | **samtools** | FASTA indexing | Preprocessing |
+| **bgzip** | Block compression for indexed FASTA | Preprocessing |
 
 ### Tool Comparison
 
@@ -140,7 +141,7 @@ STEP 3: FEEDBACK LOOP (minigraph)
 ```
 /mnt/shared_vol/
 ├── hprc_mini_fasta/                    # Input data
-│   ├── chrom19_chunk1.fa.gz            # Original chunks
+│   ├── chrom19_chunk1.fa.gz            # Original chunks (bgzip format)
 │   ├── chrom19_chunk2.fa.gz
 │   ├── chrom19_chunk3.fa.gz
 │   ├── chrom19_chunk4.fa.gz
@@ -150,18 +151,17 @@ STEP 3: FEEDBACK LOOP (minigraph)
 │   ├── chrom22_chunk3.fa.gz
 │   │
 │   └── subchunks/                      # Step 0 output
-│       ├── chr19_chunk1_sub20.fa.gz
+│       ├── chr19_chunk1_sub20.fa.gz    # bgzip compressed
+│       ├── chr19_chunk1_sub20.fa.gz.fai # samtools index
 │       ├── chr19_chunk2_sub20.fa.gz
-│       ├── chr19_chunk3_sub20.fa.gz
-│       ├── chr19_chunk4_sub20.fa.gz
-│       └── chr19_chunk5_sub20.fa.gz
+│       ├── chr19_chunk2_sub20.fa.gz.fai
+│       └── ...
 │
 └── graphs/                             # Output directory
     ├── docker_pipeline/                # Pipeline code
     │   ├── Dockerfile
-    │   ├── docker-compose.yml
     │   ├── federated_pangenome_pipeline.py
-    │   └── run_pipeline.sh
+    │   └── run_pggb_only.sh
     │
     ├── chr19_chunk1_sub20/             # Step 1: PGGB outputs
     │   └── *.smooth.final.gfa
@@ -180,7 +180,7 @@ STEP 3: FEEDBACK LOOP (minigraph)
     │   ├── chr19_chunk4_sub20_federated.gfa
     │   └── chr19_chunk5_sub20_federated.gfa
     │
-    └── pipeline_YYYYMMDD_HHMMSS.log    # Execution log
+    └── pggb_run.log                    # Execution log
 ```
 
 ---
@@ -192,6 +192,13 @@ STEP 3: FEEDBACK LOOP (minigraph)
 - Docker
 - Access to shared volume with HPRC data
 - ~50GB disk space for outputs
+- **tabix** (provides bgzip for compression)
+- **samtools** (for FASTA indexing)
+
+```bash
+# Install prerequisites
+apt-get update && apt-get install -y tabix samtools
+```
 
 ### Running the Pipeline
 
@@ -199,43 +206,14 @@ STEP 3: FEEDBACK LOOP (minigraph)
 # Navigate to pipeline directory
 cd /mnt/shared_vol/graphs/docker_pipeline
 
-# Build and run (runs in background)
-./run_pipeline.sh
+# Run PGGB on all chunks (background)
+nohup ./run_pggb_only.sh > pggb_run.log 2>&1 &
 
 # Monitor progress
-docker logs -f federated_pangenome_pipeline
+tail -f pggb_run.log
 
 # Check status
-docker ps | grep federated
-```
-
-### Manual Execution
-
-```bash
-# Build Docker image
-docker build -t federated_pangenome_pipeline .
-
-# Run container
-docker run -d \
-    --name federated_pangenome_pipeline \
-    -v /mnt/shared_vol:/mnt/shared_vol \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    federated_pangenome_pipeline
-```
-
----
-
-## ⚙️ Configuration
-
-Edit `federated_pangenome_pipeline.py` to modify:
-
-```python
-# Configuration
-INPUT_DIR = "/mnt/shared_vol/hprc_mini_fasta"
-SUBCHUNK_DIR = "/mnt/shared_vol/hprc_mini_fasta/subchunks"
-OUTPUT_DIR = "/mnt/shared_vol/graphs"
-NUM_INDIVIDUALS = 20  # Individuals per subchunk (set to 10 for faster runs)
-NUM_THREADS = 8       # CPU threads for PGGB
+ps aux | grep pggb
 ```
 
 ---
@@ -256,6 +234,27 @@ Format: `>SampleID#Haplotype#SampleID#Haplotype#Accession`
 - Each individual has 2 haplotypes (#1 and #2)
 - Files must have **complete diploid pairs** (both haplotypes present)
 
+### ⚠️ Critical: BGZIP Requirement
+
+> **PGGB requires bgzip format, NOT regular gzip!**
+
+Regular gzip files will fail with:
+```
+[E::fai_build3_core] Cannot index files compressed with gzip, please use bgzip
+```
+
+### File Preparation
+
+```bash
+# Convert gzip → bgzip + index
+gunzip -c input.fa.gz > input.fa    # Decompress
+bgzip input.fa                       # Recompress with bgzip
+samtools faidx input.fa.gz           # Create index
+
+# Verify both files exist
+ls -la input.fa.gz input.fa.gz.fai
+```
+
 ### Output GFA Format
 
 ```
@@ -264,6 +263,21 @@ S	1	ACTGACTG...
 S	2	GCTAGCTA...
 L	1	+	2	+	0M
 P	HG00097#1	1+,2+	*
+```
+
+---
+
+## ⚙️ Configuration
+
+Edit `federated_pangenome_pipeline.py` to modify:
+
+```python
+# Configuration
+INPUT_DIR = "/mnt/shared_vol/hprc_mini_fasta"
+SUBCHUNK_DIR = "/mnt/shared_vol/hprc_mini_fasta/subchunks"
+OUTPUT_DIR = "/mnt/shared_vol/graphs"
+NUM_INDIVIDUALS = 20  # Individuals per subchunk (set to 10 for faster runs)
+NUM_THREADS = 8       # CPU threads for PGGB
 ```
 
 ---
@@ -298,7 +312,7 @@ Our federated approach enables:
 
 | Step | Duration | Output Size |
 |------|----------|-------------|
-| Step 0: Subchunking | 10-30 min | ~500MB each |
+| Step 0: Subchunking | 10-30 min | ~280MB each |
 | Step 1: PGGB (×5 chunks) | 2-10 hours | ~1-5GB each |
 | Step 2: vg combine | 30-60 min | ~5-20GB |
 | Step 3: minigraph feedback | 30 min | ~1-5GB each |
@@ -309,7 +323,27 @@ Our federated approach enables:
 
 ## 🐛 Troubleshooting
 
+### PGGB fails with "Cannot index files compressed with gzip"
+
+```bash
+# Files must be bgzip format, not regular gzip
+gunzip -c file.fa.gz > file.fa
+bgzip file.fa
+samtools faidx file.fa.gz
+```
+
+### PGGB fails with "index does not exist"
+
+```bash
+# Create index with samtools
+samtools faidx your_file.fa.gz
+
+# Verify .fai file exists
+ls -la your_file.fa.gz.fai
+```
+
 ### Container not starting
+
 ```bash
 # Check Docker daemon
 systemctl status docker
@@ -320,12 +354,14 @@ docker rm -f federated_pangenome_pipeline
 ```
 
 ### S3FS slow performance
+
 ```bash
 # Copy files to local disk for faster processing
 cp /mnt/shared_vol/hprc_mini_fasta/*.fa.gz /home/ubuntu/local_data/
 ```
 
 ### PGGB memory issues
+
 ```bash
 # Reduce individuals per subchunk
 # Edit federated_pangenome_pipeline.py:
@@ -333,12 +369,68 @@ NUM_INDIVIDUALS = 10  # Instead of 20
 ```
 
 ### Check logs
-```bash
-# Docker logs
-docker logs federated_pangenome_pipeline | tail -100
 
-# Pipeline log file
-cat /mnt/shared_vol/graphs/pipeline_*.log
+```bash
+# PGGB run log
+tail -100 /mnt/shared_vol/graphs/docker_pipeline/pggb_run.log
+
+# Docker logs (if using containerized pipeline)
+docker logs federated_pangenome_pipeline | tail -100
+```
+
+---
+
+## 📋 Step-by-Step Manual Execution
+
+If the automated pipeline fails, run each step manually:
+
+```bash
+# ═══════════════════════════════════════════════════════════════
+# STEP 0: Create subchunks (first 20 individuals from each chunk)
+# ═══════════════════════════════════════════════════════════════
+cd /mnt/shared_vol/hprc_mini_fasta
+mkdir -p subchunks
+
+for i in 1 2 3 4 5; do
+  # Extract first 20 sequences
+  zcat chrom19_chunk${i}.fa.gz | awk '/^>/{n++} n<=20{print}' > subchunks/chr19_chunk${i}_sub20.fa
+  
+  # Compress with bgzip (NOT gzip!)
+  bgzip subchunks/chr19_chunk${i}_sub20.fa
+  
+  # Create index
+  samtools faidx subchunks/chr19_chunk${i}_sub20.fa.gz
+done
+
+# ═══════════════════════════════════════════════════════════════
+# STEP 1: Run PGGB on each subchunk
+# ═══════════════════════════════════════════════════════════════
+for i in 1 2 3 4 5; do
+  mkdir -p /mnt/shared_vol/graphs/chr19_chunk${i}_sub20
+  N=$(zcat subchunks/chr19_chunk${i}_sub20.fa.gz | grep -c '^>')
+  
+  docker run --rm \
+    -v /mnt/shared_vol/hprc_mini_fasta/subchunks:/data \
+    -v /mnt/shared_vol/graphs/chr19_chunk${i}_sub20:/output \
+    ghcr.io/pangenome/pggb:latest \
+    pggb -i /data/chr19_chunk${i}_sub20.fa.gz \
+         -o /output \
+         -n ${N} \
+         -t 8 \
+         -p 90 \
+         -s 10000
+done
+
+# ═══════════════════════════════════════════════════════════════
+# STEP 2: Combine graphs with vg
+# ═══════════════════════════════════════════════════════════════
+# Convert each GFA to VG and combine
+# (Run after all PGGB jobs complete)
+
+# ═══════════════════════════════════════════════════════════════
+# STEP 3: Feedback with minigraph
+# ═══════════════════════════════════════════════════════════════
+# minigraph -cxggs MEGAGRAPH.gfa chunk.fa > improved.gfa
 ```
 
 ---
@@ -347,7 +439,8 @@ cat /mnt/shared_vol/graphs/pipeline_*.log
 
 **CMU x NVIDIA Hackathon 2026**
 
-
+- Kumar Koushik Telaprolu (Carnegie Mellon University; Indiana University Bloomington)
+- [Other team members]
 
 ---
 

@@ -174,6 +174,7 @@ flowchart LR
 ---
 
 ## 🔬 Component 1: Federated Pangenome Graph Construction
+<img width="972" height="390" alt="image" src="https://github.com/user-attachments/assets/ff46ae5d-2591-4182-b548-a1d524985c26" />
 
 ### Data
 - **Human Pangenome Reference Consortium (HPRC)**
@@ -218,6 +219,7 @@ docker compose run pggb pggb \
 ---
 
 ## 🧬 Component 2: Genomic Background Hashing (APOE)
+<img width="1030" height="390" alt="image" src="https://github.com/user-attachments/assets/95644c8d-dd83-434f-885d-37bdac663d11" />
 
 To demonstrate downstream utility, we focus on the **APOE locus**, a major genetic risk factor for Alzheimer’s disease.
 

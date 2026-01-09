@@ -1,0 +1,8 @@
+# Python dependencies for this repository's scripts and notebooks
+# Note: subprocess, os, sys, logging, datetime, pathlib, and concurrent.futures
+# are part of Python's standard library and do not belong in requirements.
+
+numpy
+pandas
+matplotlib
+seaborn

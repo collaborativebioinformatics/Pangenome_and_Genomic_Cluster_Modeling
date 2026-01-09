@@ -198,6 +198,8 @@ This enables:
 
 ---
 
+## Thank you to the organizers of the hackathon!
+
 ## 📚 References
 
 - Wightman DP *et al*. *Nature Genetics* (2021)  

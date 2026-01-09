@@ -13,10 +13,13 @@ For this project we are aiming to:
 2) Perform federated genomic background hashing for phenotype association of APOE locus (using 1k genomes data)
    
 # Contributors
-- 
+-
+
+# Quick Start
+#### Step 1: Find locus of interest by filtering for low p-values from a GWAS
+Find locus using the [gwas jupyter notebook](https://github.com/collaborativebioinformatics/omnigenome/blob/main/gwas/extract_rois.ipynb) (download summary statistics from [GWAS Catalog](https://www.ebi.ac.uk/gwas/)
 
 # How to use this repo
-
 # Methods
 
 # 1) Federated pangenome graph construction

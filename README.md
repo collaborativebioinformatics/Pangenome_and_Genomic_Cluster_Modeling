@@ -4,8 +4,7 @@
 # OmniGenome: Pangenome and Genomic Cluster Modeling
 
 ## Problem 
-Pangenomes have the potential to more accurately capture genomic diversity across humans, however current state-of-the-art graphs are only on tens of individuals. Large biobanks (UK Biobank, AllOfUS) have long read sequencing data on thousands of people that could be used in the service constructing a more diverse pangenome graph, however methods do not currently exists for pangenome graph construction that enables cross-talk between biobanks. 
-
+Pangenomes are comprehensive genetic maps that capture DNA variations across multiple individuals rather than relying on a single reference genome. They hold immense promise for representing human genetic diversity more accurately, yet current state-of-the-art pangenome graphs are limited to only tens of individuals, failing to capture the full spectrum of variation across different populations. Meanwhile, major biobanks like the UK Biobank and AllOfUS have amassed high-quality long-read sequencing data from thousands of participants, representing a vast, untapped resource that could dramatically improve pangenome comprehensiveness and diversity. However, a critical technical gap exists: no methods currently enable these separate biobanks to collaborate and integrate their data into unified pangenome graphs, meaning each dataset remains siloed and the potential for creating truly representative, population-scale pangenomes that reflect global genetic diversity remains unrealized, limiting both research insights and clinical applications that depend on understanding genetic variation across all human populations.
 ## Intro and aim
 
 For this project we are aiming to:

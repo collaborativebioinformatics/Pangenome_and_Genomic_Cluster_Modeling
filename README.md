@@ -16,7 +16,7 @@ For this project we are aiming to:
 - Rob Loughnan
 - Adam Kehl
 - Jedrzej Kubica
-- Kumar Koushik
+- Kumar Koushik Telaprolu
 - Jeff Winchell
 - Sanjnaa Sridhar
 

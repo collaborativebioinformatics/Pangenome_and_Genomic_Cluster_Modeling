@@ -10,7 +10,86 @@
 ![Status](https://img.shields.io/badge/Status-In%20Development-red)
 
 ---
+```mermaid
+flowchart LR
 
+  %% =========================
+  %% INPUT FASTA CHUNKS
+  %% =========================
+  subgraph Input["Chromosome 19 FASTA Chunks"]
+    direction TB
+    C1["<b>Chunk 1</b><br/>(37 individuals)"]
+    C2["<b>Chunk 2</b><br/>(38 individuals)"]
+    C3["<b>Chunk 3</b><br/>(32 individuals)"]
+    C4["<b>Chunk 4</b><br/>(37 individuals)"]
+    C5["<b>Chunk 5</b><br/>(28 individuals)"]
+  end
+
+  %% =========================
+  %% FEDERATED SITES
+  %% =========================
+  subgraph Sites["Federated Sites (Subsampled)"]
+    direction TB
+    S1["<b>Site 1</b><br/>(n = 20)"]
+    S2["<b>Site 2</b><br/>(n = 20)"]
+    S3["<b>Site 3</b><br/>(n = 20)"]
+    S4["<b>Site 4</b><br/>(n = 20)"]
+    S5["<b>Site 5</b><br/>(n = 20)"]
+  end
+
+  %% =========================
+  %% LOCAL GRAPH CONSTRUCTION
+  %% =========================
+  subgraph LocalGraphs["Local Graph Construction (PGGB)"]
+    direction TB
+    G1["<b>GFA 1</b>"]
+    G2["<b>GFA 2</b>"]
+    G3["<b>GFA 3</b>"]
+    G4["<b>GFA 4</b>"]
+    G5["<b>GFA 5</b>"]
+  end
+
+  %% =========================
+  %% AGGREGATION
+  %% =========================
+  subgraph Aggregate["Federated Aggregation (Chromosome 19)"]
+    direction TB
+    Mega["<b>Megagraph</b><br/>(Chr19)"]
+  end
+
+  %% =========================
+  %% FORWARD FLOW (LEFT → RIGHT)
+  %% =========================
+  C1 --> S1 -->|PGGB| G1 --> Mega
+  C2 --> S2 -->|PGGB| G2 --> Mega
+  C3 --> S3 -->|PGGB| G3 --> Mega
+  C4 --> S4 -->|PGGB| G4 --> Mega
+  C5 --> S5 -->|PGGB| G5 --> Mega
+
+  %% =========================
+  %% FEEDBACK LOOP
+  %% =========================
+  Mega -. "<b>minigraph feedback</b>" .-> G3
+  Mega -. "<b>minigraph feedback</b>" .-> G1
+  Mega -. "<b>minigraph feedback</b>" .->  G2
+  Mega -. "<b>minigraph feedback</b>" .->  G4
+  Mega -. "<b>minigraph feedback</b>" .->  G5
+
+  %% =========================
+  %% STYLING (HIGH CONTRAST)
+  %% =========================
+  classDef input fill:#e6e6e6,stroke:#aaaaaa,stroke-width:1px;
+  classDef site  fill:#d6ebff,stroke:#3b82f6,stroke-width:1.5px;
+  classDef local fill:#e6fff5,stroke:#10b981,stroke-width:2px;
+  classDef mega  fill:#fff0cc,stroke:#f59e0b,stroke-width:3px;
+
+  class C1,C2,C3,C4,C5 input
+  class S1,S2,S3,S4,S5 site
+  class G1,G2,G3,G4,G5 local
+  class Mega mega
+
+```
+---
 ## 🧬 Overview
 
 This project implements a **federated approach to pangenome graph construction**, enabling privacy-preserving collaborative genomic analysis across distributed sites. The methodology simulates federated learning principles applied to pangenome construction, where raw sequence data remains local while graph representations are shared and aggregated.

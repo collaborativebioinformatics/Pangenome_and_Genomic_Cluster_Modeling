@@ -135,4 +135,49 @@ gunzip GCST013197.tsv.gz
 
 # Conclusions
 
-# References
+## References
+
+- **Wightman DP *et al*.**  
+  *A genome-wide association study with 1,126,563 individuals identifies new risk loci for Alzheimer’s disease.*  
+  **Nature Genetics**, 2021.
+
+- **Garrison E *et al*.**  
+  *Building pangenome graphs.*  
+  **Nature Methods**, 2024.
+
+- **Garrison E *et al*.**  
+  *Variation graph toolkit improves read mapping by representing genetic variation in the reference.*  
+  **Nature Biotechnology**, 2018.
+
+- **Guarracino A, Heumos S, Nahnsen S, Prins P, Garrison E.**  
+  *ODGI: understanding pangenome graphs.*  
+  **Bioinformatics**, 2022.
+
+- **Sirén J *et al*.**  
+  *Pangenomics enables genotyping of known structural variants in 5202 diverse genomes.*  
+  **Science**, 2021.
+
+- **The Gulbenkian Training Programme in Bioinformatics.**  
+  *GTPB/CPANG18: Computational Pangenomics (2018).*  
+  **Zenodo**, 2020.
+
+- **Heumos S *et al*.**  
+  *Cluster-efficient pangenome graph construction with nf-core/pangenome.*  
+  **Bioinformatics**, 2024.
+
+- **Liao W-W *et al*.**  
+  *A draft human pangenome reference.*  
+  **Nature**, 2023.
+
+- **Belloy ME, Napolioni V, Greicius MD.**  
+  *A quarter century of APOE and Alzheimer’s disease: Progress to date and the path forward.*  
+  **Neuron**, 2019.
+
+- **Byrska-Bishop M *et al*.**  
+  *High-coverage whole-genome sequencing of the expanded 1000 Genomes Project cohort including 602 trios.*  
+  **Cell**, 2022.
+
+- **Li H, Feng X, Chu C.**  
+  *The design and construction of reference pangenome graphs with minigraph.*  
+  **Genome Biology**, 2020.
+
